@@ -124,7 +124,7 @@ function analyzeSalesData(data, options) {
 
     // @TODO: Подготовка итоговой коллекции с нужными полями
     return sellerStats.map(seller => ({
-        seller_id: seller.id,// Строка, идентификатор продавца
+        id: seller.id,// Строка, идентификатор продавца
         name: seller.name,// Строка, имя продавца
         revenue: +seller.revenue.toFixed(2),// Число с двумя знаками после точки, выручка продавца
         profit: +seller.profit.toFixed(2),// Число с двумя знаками после точки, прибыль продавца
