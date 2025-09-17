@@ -7,7 +7,7 @@
 function calculateSimpleRevenue(purchase, _product) {
    // @TODO: Расчет выручки от операции
     const discount = 1 - (purchase.discount / 100);
-    return _product.sale_price * purchase.quantity * discount;
+    return purchase.sale_price * purchase.quantity * discount;
 }
 
 /**
@@ -76,15 +76,12 @@ function analyzeSalesData(data, options) {
     }));
 
     // @TODO: Индексация продавцов и товаров для быстрого доступа
-    const someIndex = Object.fromEntries(sellerStats.map(item => [item.id, item]));
-    const sellerIndex = {}; // будет хранить продавцов по id
-    for (const seller of sellerStats) {
-        sellerIndex[seller.id] = seller;
-    }
-    const productIndex = {}; // будет хранить продукты по sku
-    for (const product of data.products) {
-        productIndex[product.sku] = product;
-    }
+    const sellerIndex = Object.fromEntries(
+        sellerStats.map(seller => [seller.id, seller]));// будет хранить продавцов по id
+
+    const productIndex = Object.fromEntries(
+        data.products.map(product => [product.sku, product]));// будет хранить продукты по sku
+
 
     // @TODO: Расчет выручки и прибыли для каждого продавца
     data.purchase_records.forEach(record => { // Чек
