@@ -46,23 +46,17 @@ function analyzeSalesData(data, options) {
     }
 
     // @TODO: Проверка наличия опций
-    if (typeof options === "object" && options !== null) {
-        console.log("options — это объект!");
-    } else {
+    if (typeof options !== "object" || options === null) {
         throw new Error("options не объект, что-то пошло не так!");
     }
     const { calculateRevenue, calculateBonus } = options;
 
-    if (typeof options !== "undefined") {
-        console.log("Переменная определена");
-    } else {
-        throw new Error("Переменная не определена");
+    if (!calculateRevenue || !calculateBonus) {
+        throw new Error("calculateRevenue или calculateBonus не переданы!");
     }
 
-    if (typeof calculateRevenue === "function") {
-        console.log("Переменная функция");
-    } else {
-        throw new Error("Переменная не функция");
+    if (typeof calculateRevenue !== "function" || typeof calculateBonus !== "function") {
+        throw new Error("Ожидались функции calculateRevenue и calculateBonus");
     }
 
     // @TODO: Подготовка промежуточных данных для сбора статистики
