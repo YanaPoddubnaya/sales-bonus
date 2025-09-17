@@ -76,7 +76,9 @@ function analyzeSalesData(data, options) {
     const productIndex = Object.fromEntries(
         data.products.map(product => [product.sku, product]));// будет хранить продукты по sku
 
-
+    if (!data.purchase_records || !Array.isArray(data.purchase_records)) {
+        data.purchase_records = [];
+    }
     // @TODO: Расчет выручки и прибыли для каждого продавца
     data.purchase_records.forEach(record => { // Чек
         const seller = sellerIndex[record.seller_id]; // Продавец
