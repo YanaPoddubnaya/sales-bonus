@@ -49,20 +49,20 @@ function analyzeSalesData(data, options) {
     if (typeof options === "object" && options !== null) {
         console.log("options — это объект!");
     } else {
-        console.error("options не объект, что-то пошло не так!");
+        throw new Error("options не объект, что-то пошло не так!");
     }
     const { calculateRevenue, calculateBonus } = options;
 
     if (typeof options !== "undefined") {
         console.log("Переменная определена");
     } else {
-        console.log("Переменная не определена");
+        throw new Error("Переменная не определена");
     }
 
     if (typeof calculateRevenue === "function") {
         console.log("Переменная функция");
     } else {
-        console.log("Переменная не функция");
+        throw new Error("Переменная не функция");
     }
 
     // @TODO: Подготовка промежуточных данных для сбора статистики
@@ -121,7 +121,7 @@ function analyzeSalesData(data, options) {
 
     // @TODO: Подготовка итоговой коллекции с нужными полями
     return sellerStats.map(seller => ({
-        id: seller.id,// Строка, идентификатор продавца
+        seller_id: seller.id,// Строка, идентификатор продавца
         name: seller.name,// Строка, имя продавца
         revenue: +seller.revenue.toFixed(2),// Число с двумя знаками после точки, выручка продавца
         profit: +seller.profit.toFixed(2),// Число с двумя знаками после точки, прибыль продавца
